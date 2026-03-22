@@ -78,37 +78,37 @@ It combines:
 
 ### 🏠 Home Page
 
-![Home](./assets/home.png)
+![Home](./assert/home.png)
 
 ---
 
 ### 🏢 Landlord Listing Page
 
-![Landlord](./assets/landlord.png)
+![Landlord](./assert/landlord.png)
 
 ---
 
 ### 🔍 Property Analysis (AI + SHAP)
 
-![Analysis](./assets/analysis.png)
+![Analysis](./assert/analysis.png)
 
 ---
 
 ### 🗺 Listings + Map View
 
-![Map](./assets/map.png)
+![Map](./assert/map.png)
 
 ---
 
 ### 🧠 Interactive Map + Selection
 
-![Map Interaction](./assets/map2.png)
+![Map Interaction](./assert/map2.png)
 
 ---
 
 ### 🧠 Deep Property Analysis (AI + SHAP)
 
-![Deep Analysis](./assets/deep-analysis.png)
+![Deep Analysis](./assert/deep-analysis.png)
 
 This view provides a complete breakdown of a property:
 
