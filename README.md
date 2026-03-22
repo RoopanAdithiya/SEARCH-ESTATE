@@ -106,6 +106,23 @@ It combines:
 
 ---
 
+### 🧠 Deep Property Analysis (AI + SHAP)
+
+![Deep Analysis](./assets/deep-analysis.png)
+
+This view provides a complete breakdown of a property:
+
+- 📍 Property details (location, size, furnishing, water, age)
+- 💰 Predicted fair rent using ML
+- 📉 Overpricing analysis vs market
+- 📊 Visual comparison (predicted vs listed)
+- 🧠 SHAP-based explanation:
+  - Shows which features increased or decreased rent
+  - Human-readable feature impact
+  - Color-coded contribution bars
+
+👉 This transforms raw predictions into **transparent, explainable decisions**
+
 ## 🧠 How It Works
 
 1. User inputs property details or selects a listing
