@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:        #0a0a0f;
+  --surface:   #111118;
+  --surface2:  #1a1a24;
+  --border:    #2a2a3a;
+  --accent:    #6ee7b7;        /* emerald mint — sharp, modern */
+  --accent2:   #818cf8;        /* indigo — secondary pop */
+  --danger:    #f87171;
+  --warning:   #fbbf24;
+  --text:      #f0f0f5;
+  --muted:     #6b7280;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Grain overlay on body */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* Page fade-in */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.5s ease forwards; }
+.fade-up-2 { animation: fadeUp 0.5s 0.1s ease forwards; opacity: 0; }
+.fade-up-3 { animation: fadeUp 0.5s 0.2s ease forwards; opacity: 0; }
+.fade-up-4 { animation: fadeUp 0.5s 0.3s ease forwards; opacity: 0; }
+
+/* Pulse for loading */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(110, 231, 183, 0); }
+}
+.pulse-glow { animation: pulse-glow 2s infinite; }
+
+/* Accent glow */
+.accent-glow { box-shadow: 0 0 20px rgba(110, 231, 183, 0.15); }

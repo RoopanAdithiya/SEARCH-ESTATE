@@ -1,0 +1,301 @@
+locality,sqft,bhk,furnishing,water_source,age,rent
+Sholinganallur,900,4,semi,borewell,6,24500
+Tambaram,1400,2,full,borewell,1,28000
+Perambur,1100,1,unfurnished,borewell,11,16500
+OMR,2000,1,unfurnished,metro,14,36500
+Kodambakkam,800,2,unfurnished,metro,4,17500
+Sholinganallur,700,4,unfurnished,both,8,22500
+Medavakkam,1000,2,full,borewell,11,20000
+Kodambakkam,600,2,semi,metro,5,15500
+Chromepet,2000,2,full,both,11,41500
+Perambur,1200,2,unfurnished,both,12,20500
+Anna Nagar,1000,2,unfurnished,borewell,12,25000
+Velachery,1600,4,unfurnished,metro,10,34500
+Adyar,600,3,unfurnished,borewell,9,18000
+Sholinganallur,1600,2,semi,metro,4,39000
+Adyar,1400,2,semi,metro,14,38500
+Medavakkam,1200,3,semi,borewell,14,23000
+Medavakkam,2000,2,full,both,16,39000
+Kodambakkam,1000,2,semi,borewell,3,20000
+Nungambakkam,1200,2,full,both,12,38000
+Mylapore,900,3,semi,both,6,26500
+Kodambakkam,600,2,semi,metro,12,11500
+Porur,600,1,semi,both,8,13500
+T Nagar,600,1,full,metro,6,16000
+Velachery,1400,1,semi,borewell,4,29500
+Velachery,600,2,full,metro,5,19000
+Tambaram,1400,2,semi,metro,19,19000
+Anna Nagar,1100,2,unfurnished,borewell,8,26000
+Nungambakkam,800,2,semi,metro,2,26000
+OMR,800,2,full,both,7,25000
+Velachery,1600,1,unfurnished,both,2,34500
+Sholinganallur,2000,4,semi,metro,0,56500
+Korattur,1600,2,semi,both,0,33000
+Perambur,900,1,full,both,19,13500
+Korattur,800,4,full,metro,1,24000
+Chromepet,800,3,full,borewell,0,18500
+Perambur,1400,3,semi,borewell,11,24000
+Tambaram,800,2,full,borewell,5,17500
+Tambaram,700,2,semi,borewell,0,13500
+Porur,800,2,unfurnished,metro,11,16500
+Korattur,1000,3,semi,both,2,22500
+Mylapore,600,1,semi,metro,0,16000
+Korattur,2000,4,semi,borewell,17,29500
+OMR,1100,2,full,metro,16,27500
+Medavakkam,1200,2,full,borewell,6,29500
+Korattur,900,3,semi,borewell,15,15500
+Sholinganallur,1100,2,full,both,16,28000
+T Nagar,2000,3,semi,metro,0,56000
+Mylapore,1000,2,unfurnished,metro,14,24000
+Adyar,1200,1,full,both,9,40000
+OMR,800,2,full,metro,8,22000
+Mylapore,1000,1,unfurnished,metro,15,21500
+OMR,1000,2,semi,metro,15,25500
+Adyar,1000,1,semi,metro,14,24500
+Medavakkam,2000,2,semi,metro,4,44000
+Sholinganallur,2000,2,semi,metro,9,46000
+Velachery,1400,3,full,metro,1,47500
+Velachery,900,2,semi,borewell,0,23000
+Mylapore,800,3,semi,metro,12,23000
+Mylapore,700,1,semi,metro,7,19500
+Kodambakkam,700,2,semi,borewell,17,13500
+Nungambakkam,1400,3,unfurnished,metro,9,45000
+Adyar,600,3,full,metro,4,22500
+Mylapore,600,3,semi,metro,16,16500
+Korattur,1100,2,full,metro,8,27500
+Adyar,1600,2,unfurnished,both,18,35500
+Porur,800,2,semi,metro,15,16500
+Korattur,1200,1,semi,metro,4,21500
+Tambaram,700,4,semi,both,16,16000
+Nungambakkam,1100,1,semi,metro,17,24000
+Perambur,600,3,full,both,12,15000
+T Nagar,900,2,full,borewell,6,29500
+Sholinganallur,800,2,semi,borewell,19,16500
+Mylapore,1400,1,semi,borewell,12,29000
+Mylapore,600,1,semi,metro,11,13000
+Nungambakkam,1000,1,unfurnished,both,3,30500
+Anna Nagar,1600,2,full,both,2,54500
+Sholinganallur,1600,3,unfurnished,metro,5,45500
+Perambur,2000,1,semi,metro,17,27500
+Mylapore,1000,4,unfurnished,borewell,16,23000
+Nungambakkam,800,3,unfurnished,borewell,14,20000
+Korattur,700,1,unfurnished,borewell,4,11500
+Velachery,700,4,full,borewell,16,19500
+Nungambakkam,600,2,semi,metro,15,18500
+Porur,1000,4,semi,borewell,4,24500
+Medavakkam,2000,2,full,metro,0,47000
+Kodambakkam,600,3,semi,metro,7,17500
+Sholinganallur,2000,2,semi,both,17,42500
+Porur,1600,2,semi,metro,4,38000
+Porur,700,3,unfurnished,borewell,1,19000
+Kodambakkam,800,3,semi,borewell,14,16000
+Mylapore,1200,2,semi,borewell,9,29000
+Mylapore,900,2,unfurnished,metro,12,23000
+Kodambakkam,800,2,semi,borewell,10,18000
+Perambur,900,2,unfurnished,metro,17,13000
+Nungambakkam,2000,2,unfurnished,metro,9,52500
+Medavakkam,700,1,semi,metro,14,11500
+Korattur,1100,1,unfurnished,both,16,17000
+Velachery,800,1,full,metro,13,18000
+Medavakkam,1200,2,semi,metro,18,21000
+Kodambakkam,700,2,semi,metro,4,18500
+Mylapore,2000,2,unfurnished,metro,11,42000
+Korattur,900,2,semi,metro,3,16500
+OMR,1100,2,semi,metro,18,20000
+T Nagar,2000,2,full,metro,5,55500
+Porur,1600,2,full,metro,15,33500
+Kodambakkam,1400,3,full,borewell,7,35000
+Porur,900,4,unfurnished,borewell,10,21000
+Velachery,1400,3,unfurnished,borewell,10,29500
+Perambur,2000,2,unfurnished,metro,3,35500
+Velachery,600,2,full,borewell,10,13000
+OMR,900,2,semi,metro,9,24500
+Anna Nagar,1400,3,full,borewell,16,44500
+Korattur,1400,2,unfurnished,metro,4,25000
+Korattur,700,1,full,borewell,7,13000
+Tambaram,1600,3,unfurnished,both,4,30000
+Medavakkam,900,2,semi,borewell,7,19000
+Sholinganallur,1400,2,semi,metro,14,27000
+OMR,1200,2,full,metro,6,35500
+Adyar,1100,4,semi,metro,19,32000
+T Nagar,1200,2,unfurnished,borewell,4,33000
+Tambaram,1200,1,full,borewell,4,22000
+Chromepet,900,2,semi,borewell,7,17500
+Porur,900,3,semi,borewell,18,20000
+Tambaram,1000,3,unfurnished,metro,5,19500
+Perambur,1200,2,unfurnished,metro,12,20500
+Tambaram,900,3,unfurnished,metro,9,15500
+Velachery,2000,1,full,metro,8,46500
+Kodambakkam,1000,4,unfurnished,metro,0,29000
+OMR,1100,2,semi,metro,8,24500
+Korattur,1000,2,full,metro,10,21000
+Chromepet,700,2,semi,both,10,14500
+T Nagar,1100,1,semi,borewell,10,23000
+Chromepet,2000,1,semi,metro,19,33500
+Chromepet,1400,2,semi,metro,18,19500
+Tambaram,1400,3,full,metro,12,29500
+Adyar,700,2,semi,borewell,16,18000
+Anna Nagar,1100,3,full,metro,6,36000
+Adyar,700,2,full,metro,17,23500
+Sholinganallur,1400,1,full,metro,7,37000
+Adyar,800,3,full,metro,13,28000
+Perambur,900,4,full,metro,15,20500
+Velachery,1200,3,full,both,17,28000
+Anna Nagar,600,3,semi,metro,1,22000
+T Nagar,1000,2,unfurnished,metro,11,24500
+Adyar,900,4,unfurnished,metro,13,25000
+Anna Nagar,800,2,semi,borewell,6,22500
+Korattur,1100,2,semi,metro,12,20000
+Chromepet,700,2,unfurnished,metro,1,15500
+Velachery,1000,3,unfurnished,metro,9,22500
+OMR,1100,3,full,borewell,6,29500
+Medavakkam,600,2,semi,borewell,1,14000
+Adyar,1000,2,full,metro,7,32000
+Tambaram,900,3,full,borewell,1,21500
+Chromepet,1000,2,full,borewell,18,17500
+Adyar,900,1,semi,borewell,1,25000
+Korattur,1600,2,semi,borewell,7,31000
+Medavakkam,1600,2,unfurnished,borewell,11,25500
+Tambaram,600,1,unfurnished,metro,14,8500
+Mylapore,1400,3,semi,borewell,4,39500
+Korattur,700,2,full,both,12,15500
+Medavakkam,2000,2,unfurnished,borewell,6,35500
+Anna Nagar,1200,3,semi,metro,2,37500
+Anna Nagar,2000,2,semi,metro,11,46500
+Sholinganallur,1200,1,semi,borewell,12,27000
+Anna Nagar,600,3,semi,metro,2,22500
+Adyar,1200,1,full,metro,11,38000
+Korattur,1400,2,semi,metro,6,28000
+Velachery,800,2,full,both,17,20000
+Kodambakkam,1000,1,full,both,8,24500
+T Nagar,2000,3,full,borewell,6,55000
+Perambur,1400,2,semi,metro,19,21000
+Nungambakkam,1100,2,semi,metro,1,34500
+Korattur,2000,1,unfurnished,both,4,37000
+Kodambakkam,600,1,unfurnished,metro,14,11500
+Korattur,1600,3,unfurnished,metro,2,29500
+Adyar,1600,3,full,metro,4,49000
+Tambaram,700,2,semi,metro,4,14000
+Porur,1000,4,full,both,18,24500
+Medavakkam,800,2,semi,borewell,12,15000
+Perambur,600,1,full,metro,12,13000
+Korattur,1000,3,semi,borewell,6,20500
+Medavakkam,2000,3,full,both,17,39500
+T Nagar,700,3,semi,metro,12,21500
+Velachery,1400,2,semi,borewell,2,32000
+Chromepet,800,3,semi,both,14,16000
+Anna Nagar,900,2,semi,metro,9,26000
+Chromepet,600,1,full,both,13,11500
+Nungambakkam,1200,1,unfurnished,metro,18,28500
+Tambaram,2000,1,full,metro,3,35000
+Sholinganallur,1200,3,full,both,14,28500
+Kodambakkam,900,3,full,both,11,22500
+Medavakkam,1100,2,full,metro,11,22500
+Anna Nagar,1400,1,full,metro,7,43500
+T Nagar,1200,2,full,metro,2,40500
+T Nagar,1600,1,semi,borewell,19,29000
+Korattur,1100,2,full,borewell,10,20500
+Nungambakkam,600,1,full,metro,13,20500
+Mylapore,1100,3,semi,borewell,8,30500
+Velachery,1600,2,full,metro,19,37000
+Anna Nagar,600,2,full,metro,0,22500
+Nungambakkam,900,2,semi,both,13,28500
+Medavakkam,1200,3,unfurnished,metro,5,25500
+Korattur,1100,2,semi,metro,11,19500
+Kodambakkam,900,2,unfurnished,metro,19,18000
+T Nagar,1100,3,semi,borewell,8,29500
+Anna Nagar,1100,2,semi,metro,18,24500
+Medavakkam,800,4,semi,metro,18,15000
+Perambur,1600,2,full,metro,14,32000
+Velachery,1200,2,unfurnished,borewell,19,23000
+Kodambakkam,900,2,semi,borewell,8,21000
+T Nagar,2000,3,semi,both,1,61500
+Adyar,800,2,semi,metro,17,23000
+Perambur,1000,3,full,borewell,15,21500
+Kodambakkam,700,1,unfurnished,metro,14,15000
+Kodambakkam,1400,2,semi,metro,16,28500
+Anna Nagar,800,3,semi,borewell,3,25500
+Nungambakkam,1200,2,full,metro,13,36500
+Mylapore,1600,2,full,borewell,0,41000
+Korattur,1100,1,full,borewell,4,23500
+Perambur,1400,2,unfurnished,metro,19,20500
+Anna Nagar,700,1,full,metro,0,24000
+Porur,1000,1,semi,borewell,19,15500
+Porur,700,4,full,both,17,20000
+Perambur,700,2,semi,metro,12,13500
+T Nagar,700,2,semi,both,0,22000
+Chromepet,1000,4,full,borewell,10,23500
+Medavakkam,700,2,unfurnished,both,16,14000
+Adyar,1000,3,semi,metro,1,37000
+Anna Nagar,1100,2,unfurnished,both,12,29000
+Korattur,900,3,unfurnished,both,18,17000
+Chromepet,700,3,unfurnished,metro,10,13000
+Sholinganallur,1600,2,semi,borewell,14,31000
+Porur,800,2,semi,metro,16,16000
+Tambaram,800,1,semi,borewell,8,13000
+Adyar,1000,3,semi,metro,11,30500
+OMR,900,2,unfurnished,both,17,17500
+Mylapore,1000,1,full,borewell,14,24500
+OMR,900,4,semi,metro,3,27000
+Porur,900,3,unfurnished,borewell,7,21000
+Anna Nagar,700,2,semi,metro,10,18000
+Sholinganallur,2000,3,full,metro,16,44000
+T Nagar,900,2,unfurnished,borewell,12,22000
+Medavakkam,1200,2,semi,borewell,8,20500
+Korattur,2000,3,semi,metro,4,38000
+T Nagar,700,3,unfurnished,borewell,17,17000
+Sholinganallur,700,1,full,both,0,22500
+Sholinganallur,1000,1,full,borewell,6,23500
+Kodambakkam,1600,2,unfurnished,metro,17,30000
+Adyar,2000,2,semi,borewell,6,57000
+T Nagar,2000,2,unfurnished,borewell,3,47000
+Perambur,1000,3,full,metro,5,22500
+Velachery,700,3,full,borewell,7,20500
+Chromepet,1400,3,semi,metro,2,25500
+Adyar,700,2,semi,borewell,3,20000
+Porur,1600,1,semi,metro,15,28500
+Kodambakkam,1200,2,full,both,7,33000
+Perambur,600,3,semi,borewell,17,11500
+Porur,1100,1,full,metro,17,23000
+Nungambakkam,700,2,semi,metro,0,23500
+Sholinganallur,2000,2,semi,both,10,41500
+OMR,1100,2,semi,borewell,16,22500
+Adyar,1400,2,semi,metro,6,40000
+T Nagar,1600,2,full,metro,2,51000
+Medavakkam,1600,2,semi,metro,13,28000
+Velachery,1100,3,semi,both,5,28000
+Perambur,1000,1,full,both,11,18000
+Mylapore,900,2,full,borewell,10,28000
+Adyar,800,2,full,metro,10,29500
+Anna Nagar,1400,2,semi,metro,8,36000
+Sholinganallur,600,2,unfurnished,both,6,17500
+Mylapore,900,1,semi,both,17,18000
+Sholinganallur,1100,3,semi,borewell,1,30000
+Kodambakkam,1000,1,full,borewell,6,21500
+Medavakkam,700,2,full,metro,3,19500
+Velachery,800,2,semi,metro,3,20000
+Anna Nagar,1400,3,semi,both,9,42000
+Porur,2000,3,unfurnished,borewell,8,38000
+Anna Nagar,2000,2,unfurnished,both,1,54500
+Perambur,1100,2,semi,metro,12,19500
+Velachery,1200,3,full,metro,10,30500
+Velachery,800,1,full,both,7,19000
+Tambaram,900,3,semi,metro,10,16000
+Medavakkam,1000,2,unfurnished,metro,9,19500
+Anna Nagar,700,1,full,metro,8,23500
+Korattur,1600,2,full,both,3,38000
+OMR,700,1,semi,both,8,18500
+Korattur,1400,2,semi,borewell,19,19000
+Adyar,600,2,full,both,6,22500
+Velachery,1600,2,semi,metro,7,36000
+Sholinganallur,1100,3,full,borewell,12,33500
+Anna Nagar,700,1,semi,both,14,19500
+Nungambakkam,1100,2,semi,borewell,18,27500
+Sholinganallur,1200,2,unfurnished,metro,7,28000
+Velachery,1000,3,full,metro,9,28000
+Anna Nagar,1600,2,semi,borewell,1,48500
+T Nagar,900,1,unfurnished,metro,16,18500
+Kodambakkam,1600,4,semi,metro,18,33000
+Adyar,1000,1,semi,borewell,9,28000
+Perambur,1100,2,semi,metro,7,19500
+Nungambakkam,900,2,unfurnished,borewell,2,26500
