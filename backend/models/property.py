@@ -1,7 +1,5 @@
 # models/property.py
-# SQLAlchemy model — defines the "properties" table in your DB
-
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, Float
 from database.db import Base
 
 class Property(Base):
@@ -14,7 +12,11 @@ class Property(Base):
     furnishing   = Column(String)
     water_source = Column(String)
     age          = Column(Integer)
-    rent         = Column(Integer)   # what the landlord is listing it at
+    rent         = Column(Integer)
 
     bachelor_friendly = Column(Boolean, default=False)
     pet_friendly      = Column(Boolean, default=False)
+
+    # Auto-filled from locality when property is added
+    lat = Column(Float, nullable=True)
+    lng = Column(Float, nullable=True)

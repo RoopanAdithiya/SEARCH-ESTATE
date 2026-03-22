@@ -92,8 +92,8 @@ export default function Home() {
           <p className="text-sm mb-6" style={{ color: 'var(--muted)' }}>
             List your property and get an AI-optimized rent recommendation instantly.
           </p>
-          <div className="flex items-center gap-2 text-sm font-medium"
-               style={{ color: 'var(--accent2)' }}>
+          <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all"
+               style={{ background: 'var(--accent2)', color: '#fff' }}>
             List a property <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </div>
         </button>
