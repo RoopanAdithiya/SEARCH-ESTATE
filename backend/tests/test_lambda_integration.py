@@ -2,13 +2,12 @@
 tests/test_lambda_integration.py
 --------------------------------
 Automated integration tests verifying:
-1. Dual-mode prediction provider (Local vs. Cloud Lambda toggle).
+1. Local predictions alongside Lambda deployment parity.
 2. Numerical and explanation parity between local model and Lambda handler.
-3. Graceful fallback behavior when cloud Lambda is unavailable.
+3. Independence from legacy AWS Lambda configuration.
 """
 
 import sys
-import os
 from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
@@ -58,12 +57,10 @@ def test_local_model_vs_lambda_handler_parity(case):
         assert l_item["direction"] == lam_item["direction"]
 
 
-def test_cloud_lambda_fallback_on_unreachable_endpoint(monkeypatch):
-    """Verify application gracefully falls back to local inference when cloud endpoint is unavailable."""
-    # Force cloud mode pointing to an unreachable endpoint
+def test_legacy_lambda_settings_do_not_affect_local_prediction(monkeypatch):
+    """Verify legacy AWS settings cannot redirect inference away from FastAPI."""
     monkeypatch.setenv("USE_CLOUD_LAMBDA", "true")
     monkeypatch.setenv("LAMBDA_ENDPOINT_URL", "http://127.0.0.1:9999/unreachable")
-    monkeypatch.setenv("LAMBDA_TIMEOUT_SECONDS", "0.5")
 
     payload = {
         "locality": "Velachery",
@@ -74,7 +71,6 @@ def test_cloud_lambda_fallback_on_unreachable_endpoint(monkeypatch):
         "age": 5,
     }
 
-    # API should NOT crash; should succeed via local fallback
     response = client.post("/api/predict-rent", json=payload)
     assert response.status_code == 200
     data = response.json()

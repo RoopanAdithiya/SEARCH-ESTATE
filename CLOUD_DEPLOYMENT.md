@@ -1,7 +1,7 @@
 # Chennai Rental Intelligence Platform: AWS Cloud Deployment & Evaluation Guide
 
 **Academic Mini-Project:** Cloud Computing & Machine Learning Extension  
-**Target Services:** Amazon RDS (PostgreSQL) & AWS Lambda (Serverless Inference)  
+**Optional Cloud Services:** Amazon RDS (PostgreSQL) & AWS Lambda (Serverless Inference)
 **Author / Student:** Roopan Adithiya  
 
 ---
@@ -19,15 +19,14 @@ The system transitions from a single-machine local application into a hybrid clo
    │     ├── Production: Amazon RDS for PostgreSQL (Single-AZ, TLS)
    │     └── Fallback:   Local PostgreSQL or SQLite (app.db)
    │
-   └── Prediction Provider Layer (prediction_service.py)
-         ├── Production: AWS Lambda (Serverless XGBoost + Native Tree SHAP)
-         └── Fallback:   Local In-Process XGBoost + SHAP Explainer
+   └── Prediction Layer (prediction_service.py)
+         └── Local In-Process XGBoost + SHAP Explainer
 ```
 
 ### Key Architectural Principles
-1. **Decoupled Stateless Inference:** Machine learning inference is offloaded to AWS Lambda, freeing backend web workers from CPU-intensive matrix operations.
-2. **Resilience & Fallback:** If the cloud Lambda function times out, is throttled, or encounters network failure, FastAPI automatically falls back to the local model, ensuring uninterrupted user experience.
-3. **Managed Persistent Storage:** Structured listings are hosted on Amazon RDS with SSL encryption (`sslmode=require`), connection pooling (`pool_recycle=300`, `pool_pre_ping=True`), and versioned schema migrations via Alembic.
+1. **Local Inference:** FastAPI loads the saved XGBoost model and calculates SHAP explanations in process; predictions do not require AWS, Docker, or ECR.
+2. **Optional Cloud Resources:** The Lambda and ECR artifacts documented below remain available for separate deployment experiments but are not used by the FastAPI inference path.
+3. **Managed Persistent Storage:** Structured listings can be hosted on Amazon RDS with SSL encryption (`sslmode=require`), connection pooling (`pool_recycle=300`, `pool_pre_ping=True`), and versioned schema migrations via Alembic. Local development defaults to SQLite.
 
 ---
 
@@ -38,11 +37,7 @@ Configuration is managed via `.env` (kept out of version control). A template is
 | Variable | Type | Default | Description |
 | :--- | :---: | :---: | :--- |
 | `DATABASE_URL` | String | `sqlite:///./app.db` | SQLAlchemy connection string. Set to RDS endpoint for cloud deployment. |
-| `USE_CLOUD_LAMBDA` | Boolean | `False` | Toggles prediction provider (`True` = AWS Lambda, `False` = Local model). |
-| `AWS_REGION` | String | `ap-south-1` | AWS region hosting RDS and Lambda. |
-| `LAMBDA_FUNCTION_NAME`| String | `search-estate-rent-predictor` | AWS Lambda function name for direct `boto3` invocation. |
-| `LAMBDA_ENDPOINT_URL` | String | `""` | Optional HTTP URL if using Lambda Function URL or API Gateway. |
-| `LAMBDA_TIMEOUT_SECONDS` | Float | `5.0` | Maximum wait time before triggering local fallback. |
+Legacy `USE_CLOUD_LAMBDA`, AWS region, and Lambda endpoint variables are ignored by FastAPI; they are not required for local inference.
 
 ---
 
@@ -213,8 +208,8 @@ Here are the 10 most probable viva questions based on this architecture, along w
 ### Q1: Why did you choose Amazon RDS for PostgreSQL instead of running PostgreSQL in a Docker container on an EC2 instance?
 > **Answer:** Amazon RDS provides a managed database service that offloads routine operational maintenance. It automatically manages OS patching, automated point-in-time recovery backups, storage management, and hardware fault tolerance. Running PostgreSQL on an unmanaged EC2 instance introduces administrative overhead, requires manual EBS snapshot scripting, and lacks native high-availability failover automation.
 
-### Q2: Why is rent prediction offloaded to AWS Lambda instead of executing inside the FastAPI process?
-> **Answer:** Machine learning inference is CPU- and memory-intensive. Offloading inference to AWS Lambda decouples stateless compute from stateful application logic. Under high concurrent user traffic (e.g. hundreds of tenants evaluating properties simultaneously), in-process inference would starve the FastAPI ASGI event loop. Lambda scales horizontally and automatically to thousands of parallel containers on demand, with zero idle compute cost.
+### Q2: Where does rent prediction run in the current application?
+> **Answer:** The FastAPI process loads the existing XGBoost model and runs prediction and SHAP explanation locally. This keeps local development independent of AWS Lambda, Docker, and ECR. The Lambda handler and image build configuration remain available as separate optional deployment assets.
 
 ### Q3: What is the cold-start problem in AWS Lambda, and how does your implementation minimize it?
 > **Answer:** A cold start occurs when AWS initializes a new microVM execution environment (via Firecracker), downloads the container image, and runs initialization code before handling the first request. We minimized cold start by:
@@ -228,8 +223,8 @@ Here are the 10 most probable viva questions based on this architecture, along w
 ### Q5: How do you protect database credentials and secrets across environments?
 > **Answer:** We adhere to 12-Factor App methodology. Database credentials, AWS access keys, and connection strings are never hardcoded or committed to version control. They are injected at runtime via environment variables loaded by `python-dotenv`. In production, connections to Amazon RDS enforce TLS encryption (`sslmode=require`), and database access is restricted via Security Group rules locked to authorized IP addresses.
 
-### Q6: What happens if AWS Lambda experiences an outage or network timeout?
-> **Answer:** We implemented a resilient circuit-breaker pattern in `prediction_service.py`. When `USE_CLOUD_LAMBDA=True`, FastAPI attempts the cloud invocation with a configurable 5-second timeout. If Lambda is unreachable, throttled, or times out, the backend logs a warning and automatically falls back to local in-process inference. The tenant or landlord receives their predicted rent without experiencing a service interruption.
+### Q6: What happens to rent predictions if AWS Lambda experiences an outage?
+> **Answer:** FastAPI does not invoke AWS Lambda for inference, so Lambda availability does not affect application predictions. FastAPI performs inference using the local model directly.
 
 ### Q7: Why did you use Alembic for database migrations rather than `Base.metadata.create_all()`?
 > **Answer:** `create_all()` only creates missing tables; it cannot modify existing columns, add or remove constraints, or safely apply schema changes to a live database without dropping data. Alembic provides deterministic, reversible, version-controlled schema migrations (`alembic upgrade head` / `alembic downgrade`), tracking migration state in the `alembic_version` table across local and cloud environments.

@@ -1,88 +1,15 @@
 """
 ml/services/prediction_service.py
 ----------------------------------
-The intelligent prediction layer between your API and the model provider.
-Supports dual-mode execution:
-  - Local in-process inference (default, offline development)
-  - Cloud serverless inference via AWS Lambda (when USE_CLOUD_LAMBDA=True)
-Includes automatic local fallback if the cloud Lambda invocation fails or times out.
+The local prediction layer between the API and the trained rent model.
 Adds overpricing detection, rent stress ratio, and human-readable verdicts.
 """
 
-import os
-import json
-import logging
-from typing import Optional, Dict, Any
-from dotenv import load_dotenv
-
-load_dotenv()
-
-# Logger configuration
-logger = logging.getLogger("prediction_service")
+from ml.predictor import predict_rent_with_shap
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 OVERPRICING_THRESHOLD = 0.10   # 10% above predicted = overpriced
 HIGH_STRESS_THRESHOLD = 0.40   # rent > 40% of income = high stress (standard rule)
-
-
-def _get_cloud_config() -> dict:
-    """Read cloud prediction configuration from environment variables."""
-    use_cloud = os.getenv("USE_CLOUD_LAMBDA", "false").strip().lower() in ("true", "1", "yes")
-    return {
-        "use_cloud": use_cloud,
-        "region": os.getenv("AWS_REGION", "ap-south-1"),
-        "function_name": os.getenv("LAMBDA_FUNCTION_NAME", "search-estate-rent-predictor"),
-        "endpoint_url": os.getenv("LAMBDA_ENDPOINT_URL", "").strip(),
-        "timeout": float(os.getenv("LAMBDA_TIMEOUT_SECONDS", "5.0")),
-    }
-
-
-def _invoke_lambda(payload: dict, config: dict) -> Optional[dict]:
-    """Invoke remote AWS Lambda function using boto3 or HTTP endpoint."""
-    endpoint_url = config.get("endpoint_url")
-    timeout = config.get("timeout", 5.0)
-
-    # Path A: Function URL or HTTP Endpoint
-    if endpoint_url:
-        try:
-            import httpx
-            with httpx.Client(timeout=timeout) as client:
-                resp = client.post(endpoint_url, json=payload)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    if isinstance(data, dict) and "body" in data and isinstance(data["body"], str):
-                        data = json.loads(data["body"])
-                    return data
-                logger.warning(f"Lambda HTTP endpoint returned status {resp.status_code}: {resp.text}")
-        except Exception as e:
-            logger.warning(f"Error calling Lambda HTTP endpoint: {e}")
-        return None
-
-    # Path B: AWS SDK (boto3) direct invocation
-    try:
-        import boto3
-        from botocore.config import Config
-        boto_cfg = Config(connect_timeout=2.0, read_timeout=timeout, retries={"max_attempts": 1})
-        client = boto3.client("lambda", region_name=config["region"], config=boto_cfg)
-        response = client.invoke(
-            FunctionName=config["function_name"],
-            InvocationType="RequestResponse",
-            Payload=json.dumps(payload),
-        )
-        raw_payload = response["Payload"].read().decode("utf-8")
-        parsed = json.loads(raw_payload)
-
-        # Handle API Gateway style proxy response
-        if isinstance(parsed, dict) and "body" in parsed and isinstance(parsed["body"], str):
-            parsed = json.loads(parsed["body"])
-
-        if isinstance(parsed, dict) and parsed.get("status") == "ok":
-            return parsed
-        logger.warning(f"Lambda invocation returned unexpected payload: {parsed}")
-    except Exception as e:
-        logger.warning(f"AWS Lambda boto3 invocation failed ({e}). Proceeding to local fallback.")
-
-    return None
 
 
 def analyze_property(
@@ -96,52 +23,25 @@ def analyze_property(
     monthly_income: int = None,
 ) -> dict:
     """
-    Full property analysis — prediction + intelligence layer.
-    Routes to AWS Lambda when USE_CLOUD_LAMBDA=True, with graceful local fallback.
+    Full property analysis — local prediction + intelligence layer.
     """
-    cloud_cfg = _get_cloud_config()
-    prediction = None
-    provider_used = "local"
-
-    payload = {
-        "locality": locality,
-        "sqft": sqft,
-        "bhk": bhk,
-        "furnishing": furnishing,
-        "water_source": water_source,
-        "age": age,
-        "listed_rent": listed_rent,
-        "monthly_income": monthly_income,
-    }
-
-    # Attempt Cloud Lambda if enabled
-    if cloud_cfg["use_cloud"]:
-        prediction = _invoke_lambda(payload, cloud_cfg)
-        if prediction and prediction.get("status") == "ok":
-            provider_used = "aws_lambda"
-        else:
-            logger.info("Falling back to local in-process model.")
-
-    # Local in-process inference (default or fallback)
-    if prediction is None or prediction.get("status") != "ok":
-        from ml.predictor import predict_rent_with_shap
-        prediction = predict_rent_with_shap(
-            locality=locality,
-            sqft=sqft,
-            bhk=bhk,
-            furnishing=furnishing,
-            water_source=water_source,
-            age=age,
-        )
-        if prediction.get("status") == "error":
-            return prediction  # bubble up model error
+    prediction = predict_rent_with_shap(
+        locality=locality,
+        sqft=sqft,
+        bhk=bhk,
+        furnishing=furnishing,
+        water_source=water_source,
+        age=age,
+    )
+    if prediction.get("status") == "error":
+        return prediction
 
     predicted_rent = prediction["predicted_rent"]
     result = {
         "predicted_rent": predicted_rent,
         "explanation":    prediction.get("explanation", []),
         "status":         "ok",
-        "provider":       provider_used,
+        "provider":       "local",
     }
 
     # ── Overpricing analysis ──────────────────────────────────────────────────
