@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🏙 SearchEstate — AI-Powered Rental Intelligence Platform
 
 > Know the real price of rent. Stop guessing.
@@ -192,12 +193,83 @@ uvicorn main:app --reload
 ```
 
 ### Frontend
+=======
+# 🏙 SEARCH ESTATE: Chennai Rental Intelligence Platform
+
+An explainable, AI-powered real estate rental marketplace and cloud computing mini-project engineered for Chennai, Tamil Nadu.
+
+Extends a full-stack property application with **Amazon RDS for PostgreSQL** and **AWS Lambda** serverless ML inference.
+
+---
+
+## 🚀 Key Features
+
+- 🧠 **Serverless Rent Prediction:** XGBoost regression estimating fair market rent.
+- 📊 **SHAP Explainability:** Top-3 feature contributions (property size, locality, building age) explaining *why* a specific rent was predicted.
+- 📉 **Overpricing Detection:** Automated delta analysis comparing landlord listed rent against predicted fair rent (+10% threshold).
+- 💸 **Rent Stress Analysis:** Evaluates tenant affordability against monthly income (>40% threshold).
+- 🏠 **Marketplace & Map Exploration:** Interactive Leaflet map with fly-to coordinates, locality filters, and listing detail cards.
+- ☁️ **Dual-Mode Cloud Architecture:**
+  - **Storage:** Amazon RDS PostgreSQL (production) with seamless local SQLite/PostgreSQL fallback.
+  - **Inference:** Serverless AWS Lambda (production) with automatic local in-process fallback.
+
+---
+
+## 🧱 Architecture & Tech Stack
+
+```
+[ React 18 / Vite SPA ]  (Port 5173)
+        │
+        ▼ HTTP / JSON
+[ FastAPI Application Backend ] (Port 8000)
+   ├── Database Layer (Alembic + SQLAlchemy)
+   │     ├── Production: Amazon RDS for PostgreSQL (TLS enforced)
+   │     └── Local/Dev:  Local PostgreSQL or SQLite (app.db)
+   └── Prediction Provider Layer
+         ├── Production: AWS Lambda (XGBoost + Native C++ Tree SHAP)
+         └── Local/Dev:  In-process XGBoost + SHAP Explainer
+```
+
+---
+
+## ⚙️ Quick Start
+
+### 1. Backend Setup
+
+```bash
+cd backend
+
+# Create & activate virtual environment (if not already done)
+python -m venv venv
+# Windows:
+.\venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your database URL or leave default for local SQLite
+
+# Run database migrations
+alembic upgrade head
+
+# Run development server
+uvicorn main:app --reload
+```
+API runs at `http://127.0.0.1:8000` (Interactive docs at `http://127.0.0.1:8000/docs`).
+
+### 2. Frontend Setup
+>>>>>>> cb7acc3 (Prepare rent prediction for AWS deployment)
 
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
+<<<<<<< HEAD
 
 ---
 
@@ -229,3 +301,41 @@ Built as a full-stack + ML portfolio project demonstrating:
 * product thinking
 
 ---
+=======
+Web application runs at `http://localhost:5173`.
+
+---
+
+## 🧪 Automated Testing & Benchmarking
+
+### Run Automated Test Suite
+```bash
+pytest backend/tests/ -v
+```
+Runs 18 automated regression and integration tests verifying:
+- Database connectivity (SQLite fallback and PostgreSQL).
+- Alembic schema migrations and stable primary key constraints.
+- Property CRUD and duplicate detection (allowing distinct units).
+- Local model vs. Lambda handler exact numerical parity ($\pm$ ₹0).
+- Automatic local fallback when cloud Lambda is unreachable.
+
+### Run Local Lambda Handler Tests
+```bash
+python lambda/test_lambda_local.py
+```
+
+### Run Performance Latency Benchmark
+```bash
+python backend/scripts/benchmark_latency.py
+```
+
+---
+
+## 📖 Cloud Deployment Guide
+
+See [CLOUD_DEPLOYMENT.md](CLOUD_DEPLOYMENT.md) for complete instructions on:
+- Amazon RDS provisioning, security group configuration, and TLS setup.
+- AWS Lambda packaging, ECR container deployment, and Function URLs.
+- Cost analysis, free-tier limits, and resource cleanup instructions.
+- Viva questions and technical defense guide.
+>>>>>>> cb7acc3 (Prepare rent prediction for AWS deployment)

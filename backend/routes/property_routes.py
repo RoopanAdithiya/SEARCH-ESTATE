@@ -33,9 +33,25 @@ LOCALITY_COORDS = {
 # ── 1. Add a property listing ─────────────────────────────────────────────────
 @router.post("/add-property", response_model=PropertyResponse)
 def add_property(data: PropertyCreate, db: Session = Depends(get_db)):
-    prop_data = data.dict()
 
-    # Auto-fill lat/lng from locality
+    # Guard against accidental double-submission of an identical listing across all key attributes
+    existing = db.query(Property).filter(
+        Property.locality == data.locality,
+        Property.sqft     == data.sqft,
+        Property.bhk      == data.bhk,
+        Property.rent     == data.rent,
+        Property.furnishing == data.furnishing,
+        Property.water_source == data.water_source,
+        Property.age == data.age,
+    ).first()
+
+    if existing:
+        raise HTTPException(
+            status_code=409,
+            detail=f"An identical property listing already exists (ID #{existing.id}). Duplicate listing rejected."
+        )
+
+    prop_data = data.model_dump()
     coords = LOCALITY_COORDS.get(data.locality)
     if coords:
         prop_data["lat"] = coords[0]
@@ -51,7 +67,7 @@ def add_property(data: PropertyCreate, db: Session = Depends(get_db)):
 # ── 2. Get all properties ─────────────────────────────────────────────────────
 @router.get("/properties")
 def get_properties(db: Session = Depends(get_db)):
-    return db.query(Property).all()
+    return db.query(Property).order_by(Property.id.asc()).all()
 
 
 # ── 3. Backfill existing properties that have no lat/lng ──────────────────────
@@ -59,7 +75,6 @@ def get_properties(db: Session = Depends(get_db)):
 def backfill_coords(db: Session = Depends(get_db)):
     """
     One-time endpoint — fills lat/lng for properties added before this feature.
-    Call once from /docs, then forget about it.
     """
     props = db.query(Property).filter(Property.lat == None).all()
     updated = 0

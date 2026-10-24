@@ -10,7 +10,7 @@ Registered in main.py like:
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 
 from ml.services.prediction_service import analyze_property
 
@@ -38,6 +38,7 @@ class PredictResponse(BaseModel):
     status:         str
     overpricing:    Optional[dict] = None
     rent_stress:    Optional[dict] = None
+    explanation:    Optional[list] = None
 
 
 # ── Endpoint ───────────────────────────────────────────────────────────────────
@@ -49,6 +50,7 @@ def predict_rent_endpoint(data: PredictRequest):
     - **predicted_rent** : model's estimate of fair rent
     - **overpricing**    : comparison vs listed_rent (if provided)
     - **rent_stress**    : affordability analysis (if monthly_income provided)
+    - **explanation**    : SHAP feature contributions (top 3 factors)
     - **verdict**        : human-readable summary
     """
     try:

@@ -19,6 +19,8 @@ class PropertyCreate(BaseModel):
 # ── What the API returns after saving (includes the generated id) ─────────────
 class PropertyResponse(PropertyCreate):
     id: int
+    lat: Optional[float] = None
+    lng: Optional[float] = None
 
     class Config:
         from_attributes = True  # allows reading from SQLAlchemy model directly
