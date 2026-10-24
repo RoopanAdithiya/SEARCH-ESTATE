@@ -1,0 +1,22 @@
+
+version: 0.2
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: ap-south-1
+    ECR_REPOSITORY: search-estate-predictor
+    IMAGE_TAG: latest
+
+phases:
+  pre_build:
+    commands:
+      - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+      - ECR_URI=$ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPOSITORY
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_URI
+  build:
+    commands:
+      - docker build --platform linux/amd64 -t $ECR_URI:$IMAGE_TAG lambda/
+  post_build:
+    commands:
+      - docker push $ECR_URI:$IMAGE_TAG
+      - echo "Pushed image to $ECR_URI:$IMAGE_TAG"
